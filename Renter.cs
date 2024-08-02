@@ -1,10 +1,11 @@
 using System;
 
 public class Renter : User
-    {
-        private string driversLicenseNo
-        private string renterType
-    }
+{
+    private string driversLicenseNo;
+    private RenterType renterType;
+
+    private Booking booking;
 
     public Renter(string driversLicenseNo, RenterType renterType)
     {
@@ -24,14 +25,20 @@ public class Renter : User
         set { renterType = value; }
     }
 
+    public Booking Booking
+    {
+        get { return booking; }
+        set { booking = value; }
+    }
+
     public enum RenterType
     {
         Prime,
         Regular
     }
 
-public override string ToString()
+    public override string ToString()
     {
         return $"Driver's License No: {driversLicenseNo}, Renter Type: {renterType}";
     }
-    }
+}
