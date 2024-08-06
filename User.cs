@@ -6,13 +6,15 @@ public class User
     private string name;
     private int contact;
     private DateTime dob;
+    private string address
 
-    public User(int id, string name, int contact, DateTime dob)
+    public User(int id, string name, int contact, DateTime dob, string address)
     {
         this.id = id;
         this.name = name;
         this.contact = contact;
         this.dob = dob;
+        this.address = address;
     }
 
     public int Id
@@ -37,6 +39,12 @@ public class User
     {
         get { return dob; }
         set { dob = value; }
+    }
+
+    public string Address
+    {
+        get { return address; }
+        set { address = value }
     }
 
     public override string ToString()

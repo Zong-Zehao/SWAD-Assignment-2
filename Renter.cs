@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class Renter : User
 {
@@ -6,15 +7,15 @@ public class Renter : User
     private RenterType renterType;
 
     private List<Booking> bookList;
+    private List<DamageReport> drList;
 
-    private List<DamageReport> drList
-
-    public Renter(string driversLicenseNo, RenterType renterType, int id, string name, int contact, DateTime dob)
+    public Renter(string driversLicenseNo, RenterType renterType)
         : base(id, name, contact, dob)
     {
         this.driversLicenseNo = driversLicenseNo;
         this.renterType = renterType;
-        this.bookList = new List<Booking>(); // Initialize the list of bookings
+        this.bookList = new List<Booking>();
+        this.drList = new List<DamageReport>(); 
     }
 
     public string DriversLicenseNo
@@ -29,10 +30,16 @@ public class Renter : User
         set { renterType = value; }
     }
 
-    public Booking Booking
+    public List<Booking> BookList
     {
-        get { return booking; }
-        set { booking = value; }
+        get { return bookList; }
+        set { bookList = value; }
+    }
+
+    public List<DamageReport> DrList
+    {
+        get { return drList; }
+        set { drList = value; }
     }
 
     public enum RenterType

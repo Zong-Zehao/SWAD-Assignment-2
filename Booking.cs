@@ -3,28 +3,21 @@ using System;
 public class Booking
 {
     private int id;
-    private DateTime startDate;
-    private TimeSpan startTime;
-    private DateTime endDate;
-    private TimeSpan endTime;
     private string pickupOption;
     private int totalCost;
 
     private CarOwner carOwner;
     private Car car;
+    private Renter Renter;
+    private TimePeriod timePeriod;
 
-    public Booking(int id, DateTime startDate, TimeSpan startTime,
-                   DateTime endDate, TimeSpan endTime, string pickupOption, int totalCost, CarOwner carOwner, Car car)
+
+    public Booking(int id, TimePeriod timePeriod, string pickupOption, int totalCost)
     {
         this.id = id;
-        this.startDate = startDate;
-        this.startTime = startTime;
-        this.endDate = endDate;
-        this.endTime = endTime;
+        this.timePeriod = timePeriod;
         this.pickupOption = pickupOption;
         this.totalCost = totalCost;
-        this.carOwner = carOwner;
-        this.car = car;
     }
 
     public int Id
@@ -33,28 +26,10 @@ public class Booking
         set { id = value; }
     }
 
-    public DateTime StartDate
+    public TimePeriod TimePeriod
     {
-        get { return startDate; }
-        set { startDate = value; }
-    }
-
-    public TimeSpan StartTime
-    {
-        get { return startTime; }
-        set { startTime = value; }
-    }
-
-    public DateTime EndDate
-    {
-        get { return endDate; }
-        set { endDate = value; }
-    }
-
-    public TimeSpan EndTime
-    {
-        get { return endTime; }
-        set { endTime = value; }
+        get { return timePeriod; }
+        set { timePeriod = value; }
     }
 
     public string PickupOption
@@ -69,23 +44,10 @@ public class Booking
         set { totalCost = value; }
     }
 
-    public CarOwner CarOwner
-    {
-        get { return carOwner; }
-        set { carOwner = value; }
-    }
-
-    public Car Car
-    {
-        get { return car; }
-        set { car = value; }
-    }
-
     public override string ToString()
     {
-        return $"Booking ID: {id}, Start Date: {startDate.ToShortDateString()}, " +
-               $"Start Time: {startTime}, End Date: {endDate.ToShortDateString()}, End Time: {endTime}, " +
-               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, Car Owner: {carOwner.Name}, Car: {car.Id}";
+        return $"Booking ID: {id}, Time Period: {timePeriod}, " +
+               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, ";
     }
 }
 
