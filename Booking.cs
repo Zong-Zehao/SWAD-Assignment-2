@@ -2,34 +2,41 @@ using System;
 
 public class Booking
 {
-    private int id;
+    private int bookingId;
+    private DateTime startDateTime;
+    private DateTime endDateTime;
     private string pickupOption;
     private int totalCost;
 
     private CarOwner carOwner;
     private Car car;
-    private Renter Renter;
-    private TimePeriod timePeriod;
+    private Renter renter;
 
-
-    public Booking(int id, TimePeriod timePeriod, string pickupOption, int totalCost)
+    public Booking(int bookingId, DateTime startDateTime, DateTime endDateTime, string pickupOption, int totalCost)
     {
-        this.id = id;
-        this.timePeriod = timePeriod;
+        this.bookingId = bookingId;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         this.pickupOption = pickupOption;
         this.totalCost = totalCost;
     }
 
-    public int Id
+    public int BookingId
     {
-        get { return id; }
-        set { id = value; }
+        get { return bookingId; }
+        set { bookingId = value; }
     }
 
-    public TimePeriod TimePeriod
+    public DateTime StartDateTime
     {
-        get { return timePeriod; }
-        set { timePeriod = value; }
+        get { return startDateTime; }
+        set { startDateTime = value; }
+    }
+
+    public DateTime EndDateTime
+    {
+        get { return endDateTime; }
+        set { endDateTime = value; }
     }
 
     public string PickupOption
@@ -44,11 +51,27 @@ public class Booking
         set { totalCost = value; }
     }
 
+    public CarOwner CarOwner
+    {
+        get { return carOwner; }
+        set { carOwner = value; }
+    }
+
+    public Car Car
+    {
+        get { return car; }
+        set { car = value; }
+    }
+
+    public Renter Renter
+    {
+        get { return renter; }
+        set { renter = value; }
+    }
+
     public override string ToString()
     {
-        return $"Booking ID: {id}, Time Period: {timePeriod}, " +
-               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, ";
+        return $"Booking ID: {bookingId}, Start: {startDateTime}, End: {endDateTime}, " +
+               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, Car Owner: {carOwner.Name}, Car: {car.Id}, Renter: {renter.Name}";
     }
 }
-
-
