@@ -7,6 +7,16 @@ public class Car
     public List<RentalRate> RentalRates { get; set; }
     public List<Booking> Bookings { get; set; }
 
+    //zehao's part start
+    public string Make { get; set; }
+    public int Year { get; set; }
+    public int CarId { get; set; }
+
+    // Navigation property
+    public List<DamageReport> DamageReports { get; set; }
+    public List<Insurance> Insurances { get; set; }
+    // zehao's part end
+
     public Car()
     {
         AvailabilitySchedules = new List<AvailabilitySchedule>();

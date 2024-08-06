@@ -7,6 +7,16 @@ public class Renter : User
 
     private Booking booking;
 
+    // zehao's part start
+    public string FullName { get; set; }
+    public string ContactDetails { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public int UserId { get; set; }
+    // Navigation property
+    public List<DamageReport> DamageReports { get; set; }
+    // zehao's part end
+
+
     public Renter(string driversLicenseNo, RenterType renterType)
     {
         this.driversLicenseNo = driversLicenseNo;
