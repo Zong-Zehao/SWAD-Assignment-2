@@ -5,22 +5,16 @@ public class Renter : User
     private string driversLicenseNo;
     private RenterType renterType;
 
-    private Booking booking;
+    private List<Booking> bookList;
 
-    // zehao's part start
-    public string FullName { get; set; }
-    public string ContactDetails { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    public int UserId { get; set; }
-    // Navigation property
-    public List<DamageReport> DamageReports { get; set; }
-    // zehao's part end
+    private List<DamageReport> drList
 
-
-    public Renter(string driversLicenseNo, RenterType renterType)
+    public Renter(string driversLicenseNo, RenterType renterType, int id, string name, int contact, DateTime dob)
+        : base(id, name, contact, dob)
     {
         this.driversLicenseNo = driversLicenseNo;
         this.renterType = renterType;
+        this.bookList = new List<Booking>(); // Initialize the list of bookings
     }
 
     public string DriversLicenseNo
@@ -49,6 +43,6 @@ public class Renter : User
 
     public override string ToString()
     {
-        return $"Driver's License No: {driversLicenseNo}, Renter Type: {renterType}";
+        return $"{base.ToString()}, Driver's License No: {driversLicenseNo}, Renter Type: {renterType}";
     }
 }
