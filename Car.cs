@@ -1,56 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Car
 {
-    //Garence
-    public int Id { get; set; }
-    public List<AvailabilitySchedule> AvailabilitySchedules { get; set; }
-    public List<RentalRate> RentalRates { get; set; }
-    public List<Booking> Bookings { get; set; }
-
-    //zehao's part start
-    public string Make { get; set; }
-    public int Year { get; set; }
     public int CarId { get; set; }
-
-    // Navigation property
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    public AvailabilitySchedule AvailabilitySchedule { get; set; }
+    public RentalRate RentalRate { get; set; }
+    public List<Booking> Bookings { get; set; }
     public List<DamageReport> DamageReports { get; set; }
     public List<Insurance> Insurances { get; set; }
-    // zehao's part end
 
-    public Car()
+    public Car(int carId, string make, string model, int year, double rentalRate)
     {
-        AvailabilitySchedules = new List<AvailabilitySchedule>();
-        RentalRates = new List<RentalRate>();
-        Bookings = new List<Booking>();
+        this.CarId = carId;
+        this.Make = make;
+        this.Model = model;
+        this.Year = year;
+        this.AvailabilitySchedule = new AvailabilitySchedule(carId);
+        this.RentalRate = new RentalRate { Rate = rentalRate };
+        this.Bookings = new List<Booking>();
+        this.DamageReports = new List<DamageReport>();
+        this.Insurances = new List<Insurance>();
     }
 
-    public AvailabilitySchedule Schedule
+    public void UpdateAvailabilitySchedule(DateTime startDateTime, DateTime endDateTime)
     {
-        get { return AvailabilitySchedules.LastOrDefault(); }
-        set { UpdateSchedule(value.StartDateTime, value.EndDateTime); }
-    }
+        if (AvailabilitySchedule == null)
+        {
+            AvailabilitySchedule = new AvailabilitySchedule();
+        }
 
-    public RentalRate CurrentRate
-    {
-        get { return RentalRates.LastOrDefault(); }
-        set { UpdateRate(value.Rate); }
-    }
-
-    public List<AvailabilitySchedule> GetSchedules()
-    {
-        return AvailabilitySchedules;
+        AvailabilitySchedule.AddTimePeriod(startDateTime, endDateTime);
     }
 
     public void UpdateRate(double newRate)
     {
-        RentalRate rentalRate = new RentalRate();
-        if (rentalRate.IsValidRate(newRate))
+        if (RentalRate == null)
         {
-            rentalRate.SetRate(newRate);
-            RentalRates.Add(rentalRate);
+            RentalRate = new RentalRate();
+        }
+
+        if (RentalRate.IsValidRate(newRate))
+        {
+            RentalRate.SetRate(newRate);
             Console.WriteLine("Rental rate updated successfully.");
         }
         else
@@ -59,19 +54,8 @@ public class Car
         }
     }
 
-    public void UpdateSchedule(DateTime newStartDateTime, DateTime newEndDateTime)
+    public override string ToString()
     {
-        AvailabilitySchedule availabilitySchedule = new AvailabilitySchedule();
-        if (availabilitySchedule.IsValidDate(newStartDateTime, newEndDateTime))
-        {
-            availabilitySchedule.SetDate(newStartDateTime, newEndDateTime);
-            AvailabilitySchedules.Add(availabilitySchedule);
-            Console.WriteLine("Availability schedule updated successfully.");
-        }
-        else
-        {
-            Console.WriteLine("Error: Invalid date. The start date must be before the end date, and both must be in the future.");
-        }
+        return $"Car ID: {CarId}, Make: {Make}, Model: {Model}, Year: {Year}, Rate: {RentalRate?.Rate}, Availability: {AvailabilitySchedule}";
     }
-    //Garence
 }
