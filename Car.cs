@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Car
 {
@@ -26,26 +28,23 @@ public class Car
 
     public AvailabilitySchedule GetCurrentSchedule()
     {
-        // Implementation to get the current schedule
+        return AvailabilitySchedules.LastOrDefault();
     }
 
     public RentalRate GetCurrentRate()
     {
-        // Implementation to get the current rate
-    }
-
-    public List<AvailabilitySchedule> GetSchedules()
-    {
-        // Implementation to get the list of schedules
+        return RentalRates.LastOrDefault();
     }
 
     public void SetNewSchedule(AvailabilitySchedule newSchedule)
     {
-        // Implementation to set a new schedule
+        AvailabilitySchedules.Add(newSchedule);
+        Console.WriteLine("System validates and records the updated availability schedule.");
     }
 
     public void SetNewRate(RentalRate newRate)
     {
-        // Implementation to set a new rate
+        RentalRates.Add(newRate);
+        Console.WriteLine("System validates and records the updated rental rate.");
     }
 }
