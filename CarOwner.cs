@@ -2,35 +2,39 @@
 
 public class CarOwner
 {
+    //Garence
     public int Id { get; set; }
     public string Name { get; set; }
     public string RegisteredCar { get; set; }
 
     public void NavigateToManageBookings()
     {
-        Console.WriteLine($"{Name} navigates to manage bookings.");
+        DisplayBookings(Registeredcar);
     }
 
-    public void ModifyRentalRate(Car car, double newRate)
+    private void DisplayBookings(Car car)
     {
-        RentalRate rentalRate = new RentalRate();
-        rentalRate.SetRate(newRate);
-        if (rentalRate.IsValidRate(newRate))
+        Console.WriteLine("Current Rental Rates:");
+        foreach (var rate in car.RentalRates)
         {
-            car.SetNewRate(rentalRate);
-            Console.WriteLine("Updated rental rate confirmed.");
+            Console.WriteLine($"Rate: {rate.GetRate()}");
+        }
+
+        Console.WriteLine("Current Schedules:");
+        foreach (var schedule in car.GetSchedules())
+        {
+            Console.WriteLine($"Start: {schedule.StartDateTime}, End: {schedule.EndDateTime}");
         }
     }
 
-    public void ModifyAvailabilitySchedule(Car car, DateTime newSchedule)
+    public void SetNewRate(Car car, double newRate)
     {
-        AvailabilitySchedule availabilitySchedule = new AvailabilitySchedule();
-        availabilitySchedule.SetDate(newSchedule);
-        if (availabilitySchedule.IsValidDate(newSchedule))
-        {
-            car.SetNewSchedule(availabilitySchedule);
-            Console.WriteLine("Updated availability schedule confirmed.");
-        }
+        car.UpdateRate(newRate);
+    }
+
+    public void SetNewSchedule(Car car, DateTime newStartDateTime, DateTime newEndDateTime)
+    {
+        car.UpdateSchedule(newStartDateTime, newEndDateTime);
     }
 }
 

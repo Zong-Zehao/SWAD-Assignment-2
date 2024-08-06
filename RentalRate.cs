@@ -22,7 +22,6 @@
 
     public bool IsValidRate(double rate)
     {
-        // Validate the rate (e.g., rate must be above a certain value)
         return rate > 0;
     }
 }

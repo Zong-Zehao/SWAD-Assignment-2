@@ -2,31 +2,33 @@
 
 public class AvailabilitySchedule
 {
-    public DateTime Date { get; set; }
+    public DateTime StartDateTime { get; set; }
+    public DateTime EndDateTime { get; set; }
 
     public DateTime GetDate()
     {
-        return Date;
+        return StartDateTime;
     }
 
-    public void SetDate(DateTime date)
+    public void SetDate(DateTime startDateTime, DateTime endDateTime)
     {
-        if (IsValidDate(date))
+        if (IsValidDate(startDateTime, endDateTime))
         {
-            Date = date;
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
             Console.WriteLine("Availability schedule updated successfully.");
         }
         else
         {
-            Console.WriteLine("Error: Invalid date. The date must be in the future.");
+            Console.WriteLine("Error: Invalid date. The start date must be before the end date, and both must be in the future.");
         }
     }
 
-    public bool IsValidDate(DateTime date)
+    public bool IsValidDate(DateTime startDateTime, DateTime endDateTime)
     {
-        // Validate the date (e.g., date must not be in the past)
-        return date > DateTime.Now;
+        return startDateTime < endDateTime && startDateTime > DateTime.Now && endDateTime > DateTime.Now;
     }
 }
+
 
 
