@@ -10,11 +10,11 @@ public class Booking
     private string pickupOption;
     private int totalCost;
 
-    private Renter renter;
+    private CarOwner carOwner;
     private Car car;
 
     public Booking(int id, DateTime startDate, TimeSpan startTime,
-                   DateTime endDate, TimeSpan endTime, string pickupOption, int totalCost, Renter renter, Car car)
+                   DateTime endDate, TimeSpan endTime, string pickupOption, int totalCost, CarOwner carOwner, Car car)
     {
         this.id = id;
         this.startDate = startDate;
@@ -23,7 +23,7 @@ public class Booking
         this.endTime = endTime;
         this.pickupOption = pickupOption;
         this.totalCost = totalCost;
-        this.renter = renter;
+        this.carOwner = carOwner;
         this.car = car;
     }
 
@@ -69,10 +69,10 @@ public class Booking
         set { totalCost = value; }
     }
 
-    public Renter Renter
+    public CarOwner CarOwner
     {
-        get { return renter; }
-        set { renter = value; }
+        get { return carOwner; }
+        set { carOwner = value; }
     }
 
     public Car Car
@@ -85,7 +85,8 @@ public class Booking
     {
         return $"Booking ID: {id}, Start Date: {startDate.ToShortDateString()}, " +
                $"Start Time: {startTime}, End Date: {endDate.ToShortDateString()}, End Time: {endTime}, " +
-               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, Renter: {renter.Name}, Car: {car.Id}";
+               $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, Car Owner: {carOwner.Name}, Car: {car.Id}";
     }
 }
+
 

@@ -4,7 +4,7 @@ class Program
 {
     static void Main()
     {
-        CarOwner carOwner = new CarOwner { Id = 1, Name = "John Doe", RegisteredCar = "ABC123" };
+        CarOwner carOwner = new CarOwner { Id = 1, Name = "John", RegisteredCar = "ABC123" };
         carOwner.NavigateToManageBookings();
 
         Car car = new Car { Id = 1 };
@@ -13,31 +13,22 @@ class Program
 
         // Example of setting a new rate
         double newRate = 60.0;
-        if (rentalRate.IsValidRate(newRate))
-        {
-            car.SetNewRate(rentalRate);
-            Console.WriteLine("Updated rental rate confirmed.");
-        }
-        else
-        {
-            Console.WriteLine("Error: Invalid rental rate.");
-        }
+        carOwner.ModifyRentalRate(car, newRate);
+
+        // Invalid rate example
+        newRate = -10.0;
+        carOwner.ModifyRentalRate(car, newRate);
 
         // Example of setting a new schedule
         DateTime newDate = DateTime.Now.AddDays(2); // Example future date
-        if (availabilitySchedule.IsValidDate(newDate))
-        {
-            car.SetNewSchedule(availabilitySchedule);
-            Console.WriteLine("Updated availability schedule confirmed.");
-        }
-        else
-        {
-            Console.WriteLine("Error: Invalid date.");
-        }
+        carOwner.ModifyAvailabilitySchedule(car, newDate);
+
+        // Invalid date example
+        newDate = DateTime.Now.AddDays(-2); // Example past date
+        carOwner.ModifyAvailabilitySchedule(car, newDate);
 
         // Create a new booking
-        Renter renter = new Renter { Id = 1, Name = "Jane Smith" };
-        Booking booking = new Booking(1, DateTime.Now, new TimeSpan(10, 0, 0), DateTime.Now.AddDays(1), new TimeSpan(10, 0, 0), "Pickup at location", 100, renter, car);
+        Booking booking = new Booking(1, DateTime.Now, new TimeSpan(10, 0, 0), DateTime.Now.AddDays(1), new TimeSpan(10, 0, 0), "Pickup at location", 100, carOwner, car);
         car.Bookings.Add(booking);
 
         Console.WriteLine(booking.ToString());
@@ -64,3 +55,6 @@ class Program
         }
     }
 }
+
+
+
