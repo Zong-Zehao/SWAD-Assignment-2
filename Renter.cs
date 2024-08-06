@@ -5,17 +5,16 @@ public class Renter : User
 {
     private string driversLicenseNo;
     private RenterType renterType;
-
     private List<Booking> bookList;
     private List<DamageReport> drList;
 
-    public Renter(string driversLicenseNo, RenterType renterType)
-        : base(id, name, contact, dob)
+    public Renter(string driversLicenseNo, RenterType renterType, int userId, string name, int contact, DateTime dob, string address)
+        : base(userId, name, contact, dob, address)
     {
         this.driversLicenseNo = driversLicenseNo;
         this.renterType = renterType;
         this.bookList = new List<Booking>();
-        this.drList = new List<DamageReport>(); 
+        this.drList = new List<DamageReport>();
     }
 
     public string DriversLicenseNo

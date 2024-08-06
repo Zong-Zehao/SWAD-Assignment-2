@@ -36,18 +36,10 @@ class Program
             RenterType = Renter.RenterType.Prime,
             BookList = new List<Booking>() // Initialize the list of bookings
         };
-
-        // Add some bookings to the renter
-        renter.BookList.Add(booking);
-
-        // Display renter information
-        Console.WriteLine(renter.ToString());
-        Console.WriteLine("Bookings:");
-        foreach (var booking in renter.BookList)
-        {
-            Console.WriteLine($"- {booking}");
-        }
     }
+
+    public
+
 }
 
 
