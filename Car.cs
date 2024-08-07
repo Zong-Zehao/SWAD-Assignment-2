@@ -14,6 +14,9 @@ public class Car
     public List<DamageReport> DamageReports { get; set; }
     public List<Insurance> Insurances { get; set; }
 
+    // Static list to hold all car instances - Zehao
+    private static List<Car> cars = new List<Car>();
+
     public Car(int carId, string make, string model, int year, double rentalRate)
     {
         this.CarId = carId;
@@ -25,6 +28,7 @@ public class Car
         this.Bookings = new List<Booking>();
         this.DamageReports = new List<DamageReport>();
         this.Insurances = new List<Insurance>();
+        cars.Add(this); // Add new car to static list
     }
 
     public void UpdateAvailabilitySchedule(DateTime startDateTime, DateTime endDateTime)
@@ -56,16 +60,9 @@ public class Car
     }
 
     // zehao's part start
-    public Car GetCarById()
+    public static Car GetCarById(int carId)
     {
-        // Implementation for getting a car by ID
-        // This should interact with the database or data storage to fetch the car details by ID
-        // For now, returning a dummy car
-        if (CarId == 1234) // Example ID check
-        {
-            return new Car(CarId, "Toyota", "Corolla", 2020, 50);
-        }
-        return null;
+        return cars.Find(c => c.CarId == carId);
     }
 
     public Insurance GetInsurance(int insuranceId, string coverageDetails)

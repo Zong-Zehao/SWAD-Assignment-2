@@ -36,8 +36,8 @@ class Program
             userId: 1, name: "John Doe", contact: 1234567890, dob: new DateTime(1985, 5, 20), address: "561 Choa Chu Kang North 6");
 
         // Create a new Car object with attributes
-        Car car = new Car("Honda", "Civic", 2023, 1, 50.0);
-        Car car = new Car("Toyota", "Corolla", 2020, 2, 50.0);
+        Car car1 = new Car(1, "Honda", "Civic", 2023, 50.0);
+        Car car2 = new Car(2, "Toyota", "Corolla", 2020, 50.0);
 
         // Initialize AvailabilitySchedule and add time periods
         var availabilitySchedule = new AvailabilitySchedule();
@@ -46,6 +46,9 @@ class Program
         // Assign the schedule to the car
         car.AvailabilitySchedule = availabilitySchedule;
         //Izwan
+
+        // Submit damage report - Zehao
+        SubmitDamageReport(renter, new List<Car> { car1, car2 });
 
     }
 
@@ -155,15 +158,39 @@ class Program
 
     // zehao part start
 
-    static void SubmitDamageReport(Renter renter, int carId)
+    static void SubmitDamageReport(Renter renter)
     {
-        // System prompts user to fill in details
-        DateTime date = PromptForDate("Enter the date of the damage (yyyy-mm-dd): ");
-        TimeSpan time = PromptForTime("Enter the time of the damage (hh:mm): ");
-        string location = PromptForString("Enter the location of the damage: ");
-        string description = PromptForString("Enter the description of the damage: ");
+        int carId;
+        DateTime date;
+        TimeSpan time;
+        string location;
+        string description;
+        Car car;
 
-        // Submit the damage report
+        while (true)
+        {
+            // Prompt for all details including car ID
+            carId = PromptForInt("Enter the car ID: ");
+            date = PromptForDate("Enter the date of the damage (yyyy-mm-dd): ");
+            time = PromptForTime("Enter the time of the damage (hh:mm): ");
+            location = PromptForString("Enter the location of the damage: ");
+            description = PromptForString("Enter the description of the damage: ");
+
+            // Validate car ID
+            car = Car.GetCarById(carId);
+
+            if (car != null)
+            {
+                Console.WriteLine($"Car Details: Make: {car.Make}, Model: {car.Model}, Year: {car.Year}");
+                break; // Exit the loop when a valid car ID is found
+            }
+            else
+            {
+                Console.WriteLine("Invalid Car ID. Please enter a valid Car ID.");
+            }
+        }
+
+        // Submit the damage report when carID matches with an existing carID in the car list in car class and other inputs are correct
         try
         {
             DamageReport damageReport = new DamageReport();
@@ -175,6 +202,17 @@ class Program
             Console.WriteLine($"Error: {ex.Message}");
             Console.WriteLine("Please fill in all the details correctly and try again.");
         }
+    }
+
+    static int PromptForInt(string message)
+    {
+        Console.Write(message);
+        while (!int.TryParse(Console.ReadLine(), out int result))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            Console.Write(message);
+        }
+        return result;
     }
 
     static DateTime PromptForDate(string message)
