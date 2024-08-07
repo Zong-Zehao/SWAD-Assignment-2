@@ -10,7 +10,6 @@ public class DamageReport
     public TimeSpan Time { get; set; }
     public string Location { get; set; }
     public string Description { get; set; }
-    public List<string> Photos { get; set; }
     public string ReferenceNumber { get; set; }
 
     // Navigation properties
