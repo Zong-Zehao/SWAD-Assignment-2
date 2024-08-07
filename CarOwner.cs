@@ -2,7 +2,6 @@
 
 public class CarOwner
 {
-    //Garence
     public int Id { get; set; }
     public string Name { get; set; }
     public string RegisteredCar { get; set; }
@@ -29,13 +28,32 @@ public class CarOwner
 
     public void SetNewRate(Car car, double newRate)
     {
-        car.UpdateRate(newRate);
+        try
+        {
+            RentalRate rentalRate = new RentalRate(newRate);
+            car.UpdateRate(rentalRate);
+            Console.WriteLine("Updated Rate: " + newRate);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     public void SetNewSchedule(Car car, DateTime newStartDateTime, DateTime newEndDateTime)
     {
-        car.UpdateSchedule(newStartDateTime, newEndDateTime);
+        try
+        {
+            AvailabilitySchedule schedule = new AvailabilitySchedule(newStartDateTime, newEndDateTime);
+            car.UpdateSchedule(schedule);
+            Console.WriteLine($"Updated Schedule from {newStartDateTime} to {newEndDateTime}");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
+}
 }
 
 

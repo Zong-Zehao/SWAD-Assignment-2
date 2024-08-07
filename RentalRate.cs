@@ -1,28 +1,34 @@
 ﻿public class RentalRate
 {
-    public double Rate { get; set; }
+    public double Rate { get; private set; }
 
-    public double GetRate()
+    public RentalRate(double rate)
     {
-        return Rate;
-    }
-
-    public void SetRate(double rate)
-    {
-        if (IsValidRate(rate))
+        if (ValidateRate(rate))
         {
             Rate = rate;
-            Console.WriteLine("Rental rate updated successfully.");
         }
         else
         {
-            Console.WriteLine("Error: Invalid rental rate. The rate must be greater than 0.");
+            throw new ArgumentException("Invalid rate. Rate must be greater than 0.");
         }
     }
 
-    public bool IsValidRate(double rate)
+    public bool ValidateRate(double rate)
     {
         return rate > 0;
+    }
+
+    public void UpdateRate(double rate)
+    {
+        if (ValidateRate(rate))
+        {
+            Rate = rate;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid rate. Rate must be greater than 0.");
+        }
     }
 }
 

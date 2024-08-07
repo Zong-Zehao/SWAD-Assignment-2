@@ -6,12 +6,56 @@ class Program
     {
         Console.WriteLine("Welcome to the iCar Rental System");
 
-        //Garence
+        
         carOwner.NavigateToManageBookings(car);
-
         booking.DisplayBookings(car);
 
-        // setting a new rate
+        // Get Current Rates
+        List<double> currentRates = car.GetCurrentRates();
+        // Get Current Schedules
+        List<AvailabilitySchedule> currentSchedules = car.GetCurrentSchedules();
+
+        // Display Current Rates
+        Console.WriteLine("Current Rental Rates:");
+        foreach (var rate in currentRates)
+        {
+            Console.WriteLine(rate);
+        }
+
+        // Display Current Schedules
+        Console.WriteLine("Current Availability Schedules:");
+        foreach (var schedule in currentSchedules)
+        {
+            Console.WriteLine($"Start: {schedule.StartDateTime}, End: {schedule.EndDateTime}");
+        }
+
+        Console.WriteLine("Enter a new rental rate:");
+        double newRate;
+        while (!double.TryParse(Console.ReadLine(), out newRate))
+        {
+            Console.WriteLine("Invalid input. Please enter a numeric value for the rental rate:");
+        }
+        carOwner.SetNewRate(car, newRate);
+
+        // Prompt user to set a new schedule
+        Console.WriteLine("Enter a new start date and time (yyyy-mm-dd hh:mm):");
+        DateTime newStartDateTime;
+        while (!DateTime.TryParse(Console.ReadLine(), out newStartDateTime))
+        {
+            Console.WriteLine("Invalid input. Please enter the date and time in the format yyyy-mm-dd hh:mm:");
+        }
+
+        Console.WriteLine("Enter a new end date and time (yyyy-mm-dd hh:mm):");
+        DateTime newEndDateTime;
+        while (!DateTime.TryParse(Console.ReadLine(), out newEndDateTime))
+        {
+            Console.WriteLine("Invalid input. Please enter the date and time in the format yyyy-mm-dd hh:mm:");
+        }
+        carOwner.SetNewSchedule(car, newStartDateTime, newEndDateTime);
+    }
+}
+
+// setting a new rate
         double newRate = 60.0;
         carOwner.SetNewRate(car, newRate);
 

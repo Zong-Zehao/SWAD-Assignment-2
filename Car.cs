@@ -10,6 +10,8 @@ public class Car
     public AvailabilitySchedule AvailabilitySchedule { get; set; }
     public RentalRate RentalRate { get; set; }
     public List<Booking> Bookings { get; set; }
+    public double CurrentRate { get; set; }
+    public List<AvailabilitySchedule> AvailabilitySchedules { get; set; } = new List<AvailabilitySchedule>();
     // navigation properties
     public List<DamageReport> DamageReports { get; set; }
     public List<Insurance> Insurances { get; set; }
@@ -31,7 +33,40 @@ public class Car
         cars.Add(this); // Add new car to static list
     }
 
-    public void UpdateAvailabilitySchedule(DateTime startDateTime, DateTime endDateTime)
+    public List<double> GetCurrentRates()
+    {
+        // Assuming the rates are stored in a list within the car object
+        return new List<double> { CurrentRate };
+    }
+
+    public List<AvailabilitySchedule> GetCurrentSchedules()
+    {
+        // Assuming the schedules are stored in a list within the car object
+        return AvailabilitySchedules;
+    }
+
+    public bool ValidateRate(double rate)
+    {
+        return rate > 0;
+    }
+
+    public void StoreNewRate(double rate)
+    {
+        CurrentRate = rate;
+    }
+
+    public bool ValidateSchedule(DateTime startDateTime, DateTime endDateTime)
+    {
+        return startDateTime < endDateTime && startDateTime >= DateTime.Now;
+    }
+
+    public void StoreNewSchedule(DateTime startDateTime, DateTime endDateTime)
+    {
+        AvailabilitySchedules.Add(new AvailabilitySchedule { StartDateTime = startDateTime, EndDateTime = endDateTime });
+    }
+}
+
+public void UpdateAvailabilitySchedule(DateTime startDateTime, DateTime endDateTime)
     {
         if (AvailabilitySchedule == null)
         {

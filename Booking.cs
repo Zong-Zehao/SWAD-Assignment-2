@@ -74,4 +74,31 @@ public class Booking
         return $"Booking ID: {bookingId}, Start: {startDateTime}, End: {endDateTime}, " +
                $"Pickup Option: {pickupOption}, Total Cost: {totalCost}, Car Owner: {carOwner.Name}, Car: {car.Id}, Renter: {renter.Name}";
     }
+
+    public void UpdateNewRate(Car car, double newRate)
+    {
+        if (car.ValidateRate(newRate))
+        {
+            car.StoreNewRate(newRate);
+            Console.WriteLine("Updated Rate: " + newRate);
+        }
+        else
+        {
+            Console.WriteLine("Invalid Rate");
+        }
+    }
+
+    public void UpdateNewSchedule(Car car, DateTime startDateTime, DateTime endDateTime)
+    {
+        if (car.ValidateSchedule(startDateTime, endDateTime))
+        {
+            car.StoreNewSchedule(startDateTime, endDateTime);
+            Console.WriteLine("Updated Schedule from " + startDateTime + " to " + endDateTime);
+        }
+        else
+        {
+            Console.WriteLine("Invalid Schedule");
+        }
+    }
+}
 }

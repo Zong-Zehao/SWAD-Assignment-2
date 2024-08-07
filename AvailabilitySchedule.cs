@@ -34,4 +34,41 @@ public class AvailabilitySchedule
     {
         return startDateTime < endDateTime && startDateTime > DateTime.Now && endDateTime > DateTime.Now;
     }
+
+    public DateTime StartDateTime { get; private set; }
+    public DateTime EndDateTime { get; private set; }
+
+    public AvailabilitySchedule(DateTime startDateTime, DateTime endDateTime)
+    {
+        if (ValidateSchedule(startDateTime, endDateTime))
+        {
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid schedule. Start date must be before end date and not in the past.");
+        }
+    }
+
+    public bool ValidateSchedule(DateTime startDateTime, DateTime endDateTime)
+    {
+        return startDateTime < endDateTime && startDateTime >= DateTime.Now;
+    }
+
+    public void UpdateSchedule(DateTime startDateTime, DateTime endDateTime)
+    {
+        if (ValidateSchedule(startDateTime, endDateTime))
+        {
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid schedule. Start date must be before end date and not in the past.");
+        }
+    }
+} 
+
+
 }
