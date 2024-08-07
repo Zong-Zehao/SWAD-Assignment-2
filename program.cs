@@ -5,8 +5,38 @@ class Program
     static void Main()
     {
         Console.WriteLine("Welcome to the iCar Rental System");
+        // Main loop
+        while (true)
+        {
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Submit Damage Report");
+            Console.WriteLine("2. Manage Bookings");
+            Console.WriteLine("3. Exit");
+            Console.Write("Choose an option: ");
 
-        
+            int option;
+            while (!int.TryParse(Console.ReadLine(), out option) || option < 1 || option > 3)
+            {
+                Console.WriteLine("Invalid option. Please enter a number between 1 and 3.");
+                Console.Write("Choose an option: ");
+            }
+
+            switch (option)
+            {
+                case 1:
+                    SubmitDamageReport(renter, new List<Car> { car1, car2 });
+                    break;
+                case 2:
+                    // Navigate to booking management
+                    carOwner.NavigateToManageBookings(car1);
+                    booking.DisplayBookings(car1);
+                    break;
+                case 3:
+                    Console.WriteLine("Exiting the system. Goodbye!");
+                    return;
+            }
+        }
+
         carOwner.NavigateToManageBookings(car);
         booking.DisplayBookings(car);
 
@@ -90,9 +120,6 @@ class Program
         // Assign the schedule to the car
         car.AvailabilitySchedule = availabilitySchedule;
         //Izwan
-
-        // Submit damage report - Zehao
-        SubmitDamageReport(renter, new List<Car> { car1, car2 });
 
     }
 
