@@ -7,8 +7,9 @@ class Program
         Console.WriteLine("Welcome to the iCar Rental System");
 
         //Garence
-        CarOwner carOwner = GetLoggedInCarOwner();
-        Car car = GetCarForOwner(carOwner);
+        carOwner.NavigateToManageBookings(car);
+
+        booking.DisplayBookings(car);
 
         // setting a new rate
         double newRate = 60.0;
