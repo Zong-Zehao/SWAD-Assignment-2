@@ -100,12 +100,6 @@ public void UpdateAvailabilitySchedule(DateTime startDateTime, DateTime endDateT
         return cars.Find(c => c.CarId == carId);
     }
 
-    public Insurance GetInsurance(int insuranceId, string coverageDetails)
-    {
-        // Implementation for getting insurance details
-        return new Insurance { InsuranceId = insuranceId, CarId = this.CarId, CoverageDetails = coverageDetails };
-    }
-
     public void ScheduleRepair(int carId)
     {
         // Implementation for scheduling a repair
