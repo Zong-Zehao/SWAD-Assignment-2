@@ -44,17 +44,20 @@ class Program
 
         // Assign the schedule to the car
         car.AvailabilitySchedule = availabilitySchedule;
+        //Izwan
 
+        // Zehao
         // Submit a damage report
         DateTime date = DateTime.Now;
         TimeSpan time = DateTime.Now.TimeOfDay;
         string location = "Location A";
         string description = "Minor scratch on the left door";
 
-        // Zehao
         SubmitDamageReport(renter, car.CarId);
+        // Zehao
     }
 
+    // Izwan
     // Method to handle the car booking process
     public void BookCar()
     {
@@ -153,6 +156,7 @@ class Program
         double totalCost = rate * duration.TotalDays;
         return totalCost;
     }
+    //Izwan
 
     // zehao part start
 
