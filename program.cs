@@ -93,6 +93,9 @@ class Program
                 TotalCost = totalCost
             };
 
+            // Add the new booking time period to the availability schedule
+            car.AddAvailability(startDateTime, endDateTime);
+
             // Add the booking to the car's list of bookings
             car.Bookings.Add(booking);
 

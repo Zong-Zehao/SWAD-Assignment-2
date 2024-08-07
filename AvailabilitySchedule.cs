@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class AvailabilitySchedule
 {
     public int CarId { get; set; } // Link AvailabilitySchedule to Car
-    private List<(DateTime StartDateTime, DateTime EndDateTime)> TimePeriods { get; set; }
+    private List<(DateTime StartDateTime, DateTime EndDateTime)> timePeriods { get; set; }
 
     public AvailabilitySchedule(int carId)
     {
@@ -16,7 +16,7 @@ public class AvailabilitySchedule
     {
         if (IsValidDate(startDateTime, endDateTime))
         {
-            TimePeriods.Add((startDateTime, endDateTime));
+            timePeriods.Add((startDateTime, endDateTime));
             Console.WriteLine("Time period added successfully.");
         }
         else
@@ -27,7 +27,7 @@ public class AvailabilitySchedule
 
     public List<(DateTime StartDateTime, DateTime EndDateTime)> GetTimePeriods()
     {
-        return TimePeriods;
+        return timePeriods;
     }
 
     public bool IsValidDate(DateTime startDateTime, DateTime endDateTime)
