@@ -13,9 +13,13 @@ public class DamageReport
     public string ReferenceNumber { get; set; }
 
     // Navigation properties
-    public Renter Renter { get; set; }
     public Car Car { get; set; }
     public List<Insurance> Insurances { get; set; }
+
+    public void CreateReport(int renterId, int carId, DateTime date, TimeSpan time, string location, string description)
+    {
+        // Implementation for creating a report
+    }
     // zehao's part end
 }
 

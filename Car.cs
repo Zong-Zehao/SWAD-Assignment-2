@@ -10,6 +10,7 @@ public class Car
     public AvailabilitySchedule AvailabilitySchedule { get; set; }
     public RentalRate RentalRate { get; set; }
     public List<Booking> Bookings { get; set; }
+    // navigation properties
     public List<DamageReport> DamageReports { get; set; }
     public List<Insurance> Insurances { get; set; }
 
@@ -53,6 +54,25 @@ public class Car
             Console.WriteLine("Error: Invalid rental rate. The rate must be greater than 0.");
         }
     }
+
+    // zehao's part start
+    public Car GetCarById()
+    {
+        // Implementation for getting a car by ID
+        return this;
+    }
+
+    public Insurance GetInsurance(int insuranceId, string coverageDetails)
+    {
+        // Implementation for getting insurance details
+        return new Insurance { InsuranceId = insuranceId, CoverageDetails = coverageDetails };
+    }
+
+    public void ScheduleRepair(int carId)
+    {
+        // Implementation for scheduling a repair
+    }
+    // zehao's part end
 
     public override string ToString()
     {

@@ -10,7 +10,12 @@ public class Insurance
 
     // Navigation properties
     public Car Car { get; set; }
-    public Renter Renter { get; set; }
     public List<DamageReport> DamageReports { get; set; }
+
+    public Insurance GetInsurance(int insuranceId, string coverageDetails)
+    {
+        // Implementation for getting insurance details
+        return this;
+    }
     // Zehao's part end
 }
