@@ -47,15 +47,6 @@ class Program
         car.AvailabilitySchedule = availabilitySchedule;
         //Izwan
 
-        // Zehao
-        // Submit a damage report
-        DateTime date = DateTime.Now;
-        TimeSpan time = DateTime.Now.TimeOfDay;
-        string location = "Location A";
-        string description = "Minor scratch on the left door";
-
-        SubmitDamageReport(renter, car.CarId);
-        // Zehao
     }
 
     // Izwan
