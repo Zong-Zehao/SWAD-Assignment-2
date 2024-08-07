@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Insurance
 {
-    // Zehao's part start
     public int InsuranceId { get; set; }
     public int CarId { get; set; }
     public int UserId { get; set; }
@@ -17,5 +17,10 @@ public class Insurance
         // Implementation for getting insurance details
         return this;
     }
-    // Zehao's part end
+
+    public void ScheduleRepair(int carId)
+    {
+        // Implementation for scheduling a repair
+        Console.WriteLine($"Repair scheduled for car with ID: {carId}");
+    }
 }

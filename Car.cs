@@ -59,18 +59,25 @@ public class Car
     public Car GetCarById()
     {
         // Implementation for getting a car by ID
-        return this;
+        // This should interact with the database or data storage to fetch the car details by ID
+        // For now, returning a dummy car
+        if (CarId == 1234) // Example ID check
+        {
+            return new Car(CarId, "Toyota", "Corolla", 2020, 50);
+        }
+        return null;
     }
 
     public Insurance GetInsurance(int insuranceId, string coverageDetails)
     {
         // Implementation for getting insurance details
-        return new Insurance { InsuranceId = insuranceId, CoverageDetails = coverageDetails };
+        return new Insurance { InsuranceId = insuranceId, CarId = this.CarId, CoverageDetails = coverageDetails };
     }
 
     public void ScheduleRepair(int carId)
     {
         // Implementation for scheduling a repair
+        Console.WriteLine($"Repair scheduled for car with ID: {carId}");
     }
     // zehao's part end
 

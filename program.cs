@@ -36,6 +36,7 @@ class Program
 
         // Create a new Car object with attributes
         Car car = new Car("Honda", "Civic", 2023, 1, 50.0);
+        Car car = new Car("Toyota", "Corolla", 2020, 2, 50.0);
 
         // Initialize AvailabilitySchedule and add time periods
         var availabilitySchedule = new AvailabilitySchedule();
@@ -43,6 +44,15 @@ class Program
 
         // Assign the schedule to the car
         car.AvailabilitySchedule = availabilitySchedule;
+
+        // Submit a damage report
+        DateTime date = DateTime.Now;
+        TimeSpan time = DateTime.Now.TimeOfDay;
+        string location = "Location A";
+        string description = "Minor scratch on the left door";
+
+        // Zehao
+        SubmitDamageReport(renter, car.CarId);
     }
 
     // Method to handle the car booking process
@@ -143,12 +153,63 @@ class Program
         double totalCost = rate * duration.TotalDays;
         return totalCost;
     }
+
+    // zehao part start
+
+    static void SubmitDamageReport(Renter renter, int carId)
+    {
+        // System prompts user to fill in details
+        DateTime date = PromptForDate("Enter the date of the damage (yyyy-mm-dd): ");
+        TimeSpan time = PromptForTime("Enter the time of the damage (hh:mm): ");
+        string location = PromptForString("Enter the location of the damage: ");
+        string description = PromptForString("Enter the description of the damage: ");
+
+        // Submit the damage report
+        try
+        {
+            DamageReport damageReport = new DamageReport();
+            damageReport.CreateReport(renter.UserId, carId, date, time, location, description);
+            Console.WriteLine("Damage report submitted successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine("Please fill in all the details correctly and try again.");
+        }
+    }
+
+    static DateTime PromptForDate(string message)
+    {
+        Console.Write(message);
+        while (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
+        {
+            Console.WriteLine("Invalid date format. Please try again.");
+            Console.Write(message);
+        }
+        return date;
+    }
+
+    static TimeSpan PromptForTime(string message)
+    {
+        Console.Write(message);
+        while (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan time))
+        {
+            Console.WriteLine("Invalid time format. Please try again.");
+            Console.Write(message);
+        }
+        return time;
+    }
+
+    static string PromptForString(string message)
+    {
+        Console.Write(message);
+        string input = Console.ReadLine();
+        while (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Input cannot be empty. Please try again.");
+            Console.Write(message);
+        }
+        return input;
+    }
+    // zehao part end
 }
-
-
-
-
-
-
-
-
